@@ -1,4 +1,13 @@
 package be.bnpparibasfortis.bookstore.cart.repository;
 
-public interface CartRepository {
+import be.bnpparibasfortis.bookstore.cart.repository.entity.CartEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.Optional;
+import java.util.UUID;
+
+@Repository
+public interface CartRepository extends JpaRepository<CartEntity, UUID> {
+    Optional<CartEntity> findByUserId(UUID userId);
 }

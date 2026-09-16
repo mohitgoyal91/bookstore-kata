@@ -1,4 +1,4 @@
-package be.bnpparibasfortis.bookstore.auth.service.exception;
+package be.bnpparibasfortis.bookstore.exception;
 
 public class EmailAlreadyExistsException extends RuntimeException {
 

@@ -1,4 +1,4 @@
-package be.bnpparibasfortis.bookstore.auth.config.models;
+package be.bnpparibasfortis.bookstore.models;
 
 public record ErrorResponse(
         String message

@@ -6,6 +6,6 @@ public record Book(
         UUID id,
         String title,
         String author,
-        BigDecimal price
-) {
+        BigDecimal price,
+        int quantity) {
 }

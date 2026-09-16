@@ -1,4 +1,7 @@
 package be.bnpparibasfortis.bookstore.cart.service.models;
 
-public class CartItem {
+import java.util.UUID;
+import jakarta.validation.constraints.NotNull;
+
+public record CartItem(@NotNull(message = "Book ID is required") UUID bookId, int quantity) {
 }
