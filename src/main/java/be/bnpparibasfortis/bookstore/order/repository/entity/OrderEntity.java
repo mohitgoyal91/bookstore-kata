@@ -14,18 +14,19 @@ import java.util.UUID;
 @Entity
 @Table(name = "orders")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Getter
 public class OrderEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Getter
     private UUID id;
 
     @Column(name = "user_id", nullable = false)
     private UUID userId;
 
     @Column(nullable = false)
-    private BigDecimal totalPrice;
+    @Getter
+    private BigDecimal totalPrice = BigDecimal.ZERO;
 
     @Column(nullable = false)
     private Instant createdAt;
@@ -35,21 +36,17 @@ public class OrderEntity {
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
+    @Getter
     private List<OrderItemEntity> items = new ArrayList<>();
 
-    public OrderEntity(UUID userId, BigDecimal totalPrice) {
+    public OrderEntity(UUID userId) {
         this.userId = userId;
-        this.totalPrice = totalPrice;
         this.createdAt = Instant.now();
     }
 
     public void addItem(OrderItemEntity item) {
         items.add(item);
+        totalPrice = totalPrice.add(item.getTotalPrice());
         item.setOrder(this);
-    }
-
-    public void removeItem(OrderItemEntity item) {
-        items.remove(item);
-        item.setOrder(null);
     }
 }

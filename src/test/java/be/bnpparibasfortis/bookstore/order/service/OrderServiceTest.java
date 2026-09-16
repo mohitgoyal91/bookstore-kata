@@ -10,6 +10,7 @@ import be.bnpparibasfortis.bookstore.cart.service.models.Cart;
 import be.bnpparibasfortis.bookstore.cart.service.models.CartItem;
 import be.bnpparibasfortis.bookstore.order.repository.OrderRepository;
 import be.bnpparibasfortis.bookstore.order.repository.entity.OrderEntity;
+import be.bnpparibasfortis.bookstore.order.repository.entity.OrderItemEntity;
 import be.bnpparibasfortis.bookstore.order.service.impl.OrderService;
 import be.bnpparibasfortis.bookstore.order.service.models.Order;
 import org.junit.jupiter.api.BeforeEach;
@@ -83,7 +84,9 @@ public class OrderServiceTest {
             CartItem cartItem = new CartItem(UUID.randomUUID(), 2);
             when(cartService.getOrCreateCart(user)).thenReturn(new Cart(UUID.randomUUID(), user.getId(), List.of(cartItem)));
             when(bookService.findBook(any())).thenReturn(new Book(UUID.randomUUID(), "", "", BigDecimal.ONE, 2));
-            when(orderRepository.save(any())).thenReturn(new OrderEntity(user.getId(), BigDecimal.valueOf(2)));
+            OrderEntity orderEntity = new OrderEntity(user.getId());
+            orderEntity.addItem(new OrderItemEntity(UUID.randomUUID(), "", BigDecimal.ONE, 2));
+            when(orderRepository.save(any())).thenReturn(orderEntity);
             doNothing().when(bookService).decreaseStock(any(), anyInt());
             doNothing().when(cartService).clearCart(any());
 

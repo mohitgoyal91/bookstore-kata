@@ -52,7 +52,7 @@ public class OrderService implements IOrderService {
                 .map(this::toOrderItemEntity)
                 .toList();
 
-        OrderEntity orderEntity = new OrderEntity(user.getId(), getTotalPrice(orderItems));
+        OrderEntity orderEntity = new OrderEntity(user.getId());
         orderItems.forEach(orderEntity::addItem);
 
         OrderEntity savedOrder = orderRepository.save(orderEntity);
@@ -94,15 +94,5 @@ public class OrderService implements IOrderService {
                 book.price(),
                 item.quantity()
         );
-    }
-
-    private BigDecimal getTotalPrice(List<OrderItemEntity> items) {
-        BigDecimal total = BigDecimal.ZERO;
-
-        for(int i = 0; i < items.size(); i++) {
-            total = total.add(items.get(i).getTotalPrice());
-        }
-
-        return total;
     }
 }

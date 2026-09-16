@@ -25,7 +25,7 @@ public class CartItemEntity {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "cartId", nullable = false)
-    @Setter
+    @Setter(AccessLevel.PACKAGE)
     private CartEntity cart;
 
     @Column(name = "bookId", nullable = false)
