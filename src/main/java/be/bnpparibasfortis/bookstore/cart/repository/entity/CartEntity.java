@@ -26,6 +26,10 @@ public class CartEntity {
     )
     private List<CartItemEntity> items = new ArrayList<>();
 
+    public List<CartItemEntity> getItems() {
+        return Collections.unmodifiableList(items);
+    }
+
     public CartEntity(UUID userId) {
         this.userId = Objects.requireNonNull(userId, "userId is required");
     }

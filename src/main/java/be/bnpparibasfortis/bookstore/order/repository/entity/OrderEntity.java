@@ -7,9 +7,7 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Entity
 @Table(name = "orders")
@@ -36,8 +34,11 @@ public class OrderEntity {
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
-    @Getter
     private List<OrderItemEntity> items = new ArrayList<>();
+
+    public List<OrderItemEntity> getItems() {
+        return Collections.unmodifiableList(items);
+    }
 
     public OrderEntity(UUID userId) {
         this.userId = userId;
@@ -45,8 +46,18 @@ public class OrderEntity {
     }
 
     public void addItem(OrderItemEntity item) {
+        Objects.requireNonNull(item, "item is required");
+
+        if (item.getOrder() != null) {
+            throw new IllegalArgumentException(
+                    "Item already belongs to an order"
+            );
+        }
+
+        BigDecimal updatedTotal = totalPrice.add(item.getTotalPrice());
+
         items.add(item);
-        totalPrice = totalPrice.add(item.getTotalPrice());
         item.setOrder(this);
+        totalPrice = updatedTotal;
     }
 }
