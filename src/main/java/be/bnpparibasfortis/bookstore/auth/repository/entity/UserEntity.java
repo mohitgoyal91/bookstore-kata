@@ -2,8 +2,9 @@ package be.bnpparibasfortis.bookstore.auth.repository.entity;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.jspecify.annotations.Nullable;
 
 import java.util.UUID;
@@ -14,12 +15,13 @@ import java.util.UUID;
  * */
 @Entity
 @Table(name = "users")
-@Data
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Getter
 public class UserEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Setter
     private UUID id;
 
     @Column(nullable = false)

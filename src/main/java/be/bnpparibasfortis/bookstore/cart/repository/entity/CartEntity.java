@@ -3,6 +3,7 @@ package be.bnpparibasfortis.bookstore.cart.repository.entity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
@@ -11,8 +12,8 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "carts")
-@Data
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Getter
 public class CartEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

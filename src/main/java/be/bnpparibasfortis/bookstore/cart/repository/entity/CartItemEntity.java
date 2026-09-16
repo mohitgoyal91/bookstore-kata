@@ -1,9 +1,7 @@
 package be.bnpparibasfortis.bookstore.cart.repository.entity;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.UUID;
 
@@ -17,8 +15,8 @@ import java.util.UUID;
                 )
         }
 )
-@Data
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Getter
 public class CartItemEntity {
 
     @Id
@@ -27,12 +25,14 @@ public class CartItemEntity {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "cartId", nullable = false)
+    @Setter
     private CartEntity cart;
 
     @Column(name = "bookId", nullable = false)
     private UUID bookId;
 
     @Column(nullable = false)
+    @Setter
     private int quantity;
 
     public CartItemEntity(UUID bookId, int quantity) {

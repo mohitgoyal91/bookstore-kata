@@ -2,7 +2,7 @@ package be.bnpparibasfortis.bookstore.order.repository.entity;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
@@ -13,8 +13,8 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "orders")
-@Data
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Getter
 public class OrderEntity {
 
     @Id

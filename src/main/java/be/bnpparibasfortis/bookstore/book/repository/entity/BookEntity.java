@@ -2,9 +2,7 @@ package be.bnpparibasfortis.bookstore.book.repository.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.PositiveOrZero;
-import lombok.AccessLevel;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.util.UUID;
@@ -15,8 +13,8 @@ import java.util.UUID;
  * */
 @Entity
 @Table(name = "books")
-@Data
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Getter
 public class BookEntity {
 
     @Id
@@ -26,6 +24,7 @@ public class BookEntity {
     private String title;
     private String author;
     private BigDecimal price;
+    @Setter
     @PositiveOrZero
     private int quantity;
 
