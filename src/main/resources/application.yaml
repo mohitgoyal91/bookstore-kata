@@ -13,6 +13,8 @@ spring:
   h2:
     console:
       enabled: true
+  profiles:
+    active: dev
 
 jwt:
   secret: secure-string
@@ -23,3 +25,5 @@ logging:
     org:
       springframework:
         security: DEBUG
+
+
