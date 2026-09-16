@@ -13,7 +13,7 @@ import java.util.UUID;
  * */
 @Entity
 @Table(name = "books")
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 @Getter
 public class BookEntity {
 
